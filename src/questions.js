@@ -106,8 +106,20 @@ module.exports = {
          "Twitter" : { "Count" : "28,500,000", "Description" : "28.5 Million" }
        },
        {
-         "name"
+         "name" : 
        }
+       /**
+       50 Cent, Calvin Harris, Kendrick Lamar, 2 Chainz, J Cole, Daft Punk, Pharrel, Chris Brown,
+       Big Sean, Trey Songz, Beyonce, Nicki Minaj, The Weeknd, Chance the Rapper, John Legend, Bruno Mars,
+       Tim Mcgraw, Carrie Underwood, Miranda Lambert, Garth Brooks, Blake Shelton, Gwen Stefani, Adam Levine,
+       Kenny Chesney, Brad Paisley, Toby Keith, Alicia Keys, Sam Hunt, Luke Bryan, Keith Urban, Madonna,
+       Kelly Clarkson, Britney Spears, John Mayer, ASAP Rocky, Jason Aldean, Eric Church, Pink, DJ Khaled,
+       Ed Sheeran, Ellie Goulding, Shawn Mendes, Kylie Minogue, Future, David Guetta, Mac Miller, Mariah Carey,
+       Macklemore, Iggy Azalea, Harry Styles, Zayn, Wale, Meek Mill, Frank Ocean, Lana Del Rey, Sia, Josh Groban,
+       Diplo, Steve Aoki, Lil Yachty, Damian Marley, Ice Cube, Blink 182, Coldplay, Radiohead, Fall Out Boy,
+       The Chainsmokers, Imagine Dragons, Skrillex, Pearl Jam, U2, Tyga, Paramore, Metallica, Michael Buble,
+       Solange, One Direction,
+       */
      ],
      "SOCIAL_NETWORKS" : [
        "Instagram", "Twitter"
