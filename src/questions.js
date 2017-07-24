@@ -1,21 +1,7 @@
 'use strict';
 
 module.exports = {
-    /**
-     * When editing your questions pay attention to your punctuation. Make sure you use question marks or periods.
-     * Make sure the first answer is the correct one. Set at least ANSWER_COUNT answers, any extras will be shuffled in.
-     */
 
-     /**
-
-     Of ____ and ____, who has more followers on ____?
-     On ____, who has more followers: ____ or ____?
-     Who has more ____ followers, ____ or ____?
-     Between ____ and ____, who has the most ____ followers?
-     Does ____ or ____ have more followers ____?
-     Does ____ or ____ have more ____ followers?
-
-     */
      "QUESTION_TEMPLATES" : [
        "Of NAME_ONE and NAME_TWO, who has more followers on SOCIAL_NETWORK?",
        "On SOCIAL_NETWORK, who has more followers: NAME_ONE or NAME_TWO?",
@@ -24,6 +10,7 @@ module.exports = {
        "Does NAME_ONE or NAME_TWO have more followers on SOCIAL_NETWORK?",
        "Does NAME_ONE or NAME_TWO have more SOCIAL_NETWORK followers?"
      ],
+
      "ACCOUNTS" : [
        {
          "name" : "Katy Perry",
@@ -106,271 +93,428 @@ module.exports = {
          "Twitter" : { "Count" : "28,500,000", "Description" : "28.5 Million" }
        },
        {
-         "name" : 
+         "name" : "John Mayer",
+         "Instagram" : { "Count" : "2,200,000", "Description" : "2.2 Million" },
+         "Twitter" : { "Count" : "1,000,000", "Description" : "1 Million" }
+       },
+       {
+         "name" : "ASAP Rocky",
+         "Instagram" : { "Count" : "6,400,000", "Description" : "6.4 Million" },
+         "Twitter" : { "Count" : "1,690,000", "Description" : "1.7 Million" }
+       },
+       {
+         "name" : "Jason Aldean",
+         "Instagram" : { "Count" : "1,900,000", "Description" : "1.9 Million" },
+         "Twitter" : { "Count" : "3,360,000", "Description" : "3.4 Million" }
+       },
+       {
+         "name" : "Eric Church",
+         "Instagram" : { "Count" : "614,000", "Description" : "614 Thousand" },
+         "Twitter" : { "Count" : "2,050,000", "Description" : "2.1 Million" }
+       },
+       {
+         "name" : "Pink",
+         "Instagram" : { "Count" : "2,100,000", "Description" : "2.1 Million" },
+         "Twitter" : { "Count" : "29,700,000", "Description" : "29.7 Million" }
+       },
+       {
+         "name" : "DJ Khaled",
+         "Instagram" : { "Count" : "6,900,000", "Description" : "6.9 Million" },
+         "Twitter" : { "Count" : "3,510,000", "Description" : "3.5 Million" }
+       },
+       {
+         "name" : "Ed Sheeran",
+         "Instagram" : { "Count" : "14,100,000", "Description" : "14.1 Million" },
+         "Twitter" : { "Count" : "19,800,000", "Description" : "19.8 Million" }
+       },
+       {
+         "name" : "Ellie Goulding",
+         "Instagram" : { "Count" : "14,000,000", "Description" : "14 Million" },
+         "Twitter" : { "Count" : "6,850,000", "Description" : "6.85 Million" }
+       },
+       {
+         "name" : "Shawn Mendes",
+         "Instagram" : { "Count" : "23,400,000", "Description" : "23.4 Million" },
+         "Twitter" : { "Count" : "11,100,000", "Description" : "11.1 Million" }
+       },
+       {
+         "name" : "Kylie Minogue",
+         "Instagram" : { "Count" : "1,500,000", "Description" : "1.5 Million" },
+         "Twitter" : { "Count" : "2,340,000", "Description" : "2.3 Million" }
+       },
+       {
+         "name" : "Future",
+         "Instagram" : { "Count" : "10,900,000", "Description" : "10.9 Million" },
+         "Twitter" : { "Count" : "4,130,000", "Description" : "4.1 Million" }
+       },
+       {
+         "name" : "David Guetta",
+         "Instagram" : { "Count" : "7,900,000", "Description" : "7.9 Million" },
+         "Twitter" : { "Count" : "21,800,000", "Description" : "21.8 Million" }
+       },
+       {
+         "name" : "Mac Miller",
+         "Instagram" : { "Count" : "2,800,000", "Description" : "2.8 Million" },
+         "Twitter" : { "Count" : "6,780,000", "Description" : "6.8 Million" }
+       },
+       {
+         "name" : "Mariah Carey",
+         "Instagram" : { "Count" : "5,900,000", "Description" : "5.9 Million" },
+         "Twitter" : { "Count" : "18,400,000", "Description" : "18.4 Million" }
+       },
+       {
+         "name" : "Macklemore",
+         "Instagram" : { "Count" : "4,000,000", "Description" : "4 Million" },
+         "Twitter" : { "Count" : "2,760,000", "Description" : "2.8 Million" }
+       },
+       {
+         "name" : "Iggy Azalea",
+         "Instagram" : { "Count" : "10,300,000", "Description" : "10.3 Million" },
+         "Twitter" : { "Count" : "7,630,000", "Description" : "7.6 Million" }
+       },
+       {
+         "name" : "Harry Styles",
+         "Instagram" : { "Count" : "21,400,000", "Description" : "21.4 Million" },
+         "Twitter" : { "Count" : "30,900,000", "Description" : "30.9 Million" }
+       },
+       {
+         "name" : "Zayn",
+         "Instagram" : { "Count" : "23,200,000", "Description" : "23.2 Million" },
+         "Twitter" : { "Count" : "22,500,000", "Description" : "22.5 Million" }
+       },
+       {
+         "name" : "Wale",
+         "Instagram" : { "Count" : "2,900,000", "Description" : "2.9 Million" },
+         "Twitter" : { "Count" : "5,540,000", "Description" : "5.5 Million" }
+       },
+       {
+         "name" : "Meek Mill",
+         "Instagram" : { "Count" : "11,700,000", "Description" : "11.7 Million" },
+         "Twitter" : { "Count" : "6,220,000", "Description" : "6.2 Million" }
+       },
+       {
+         "name" : "Tyler, the Creator",
+         "Instagram" : { "Count" : "3,600,000", "Description" : "3.6 Million" },
+         "Twitter" : { "Count" : "4,210,000", "Description" : "4.2 Million" }
+       },
+       {
+         "name" : "Lana Del Rey",
+         "Instagram" : { "Count" : "10,100,000", "Description" : "10.1 Million" },
+         "Twitter" : { "Count" : "6,640,000", "Description" : "6.6 Million" }
+       },
+       {
+         "name" : "Sia",
+         "Instagram" : { "Count" : "2,700,000", "Description" : "2.7 Million" },
+         "Twitter" : { "Count" : "3,010,000", "Description" : "3 Million" }
+       },
+       {
+         "name" : "Diplo",
+         "Instagram" : { "Count" : "3,900,000", "Description" : "3.9 Million" },
+         "Twitter" : { "Count" : "2,300,000", "Description" : "2.3 Million" }
+       },
+       {
+         "name" : "Steve Aoki",
+         "Instagram" : { "Count" : "5,500,000", "Description" : "5.5 Million" },
+         "Twitter" : { "Count" : "6,450,000", "Description" : "6.5 Million" }
+       },
+       {
+         "name" : "Lil Yachty",
+         "Instagram" : { "Count" : "3,400,000", "Description" : "3.4 Million" },
+         "Twitter" : { "Count" : "1,480,000", "Description" : "1.5 Million" }
+       },
+       {
+         "name" : "Ice Cube",
+         "Instagram" : { "Count" : "10,000,000", "Description" : "10 Million" },
+         "Twitter" : { "Count" : "4,290,000", "Description" : "4.3 Million" }
+       },
+       {
+         "name" : "Blink 182",
+         "Instagram" : { "Count" : "1,400,000", "Description" : "1.4 Million" },
+         "Twitter" : { "Count" : "1,650,000", "Description" : "1.7 Million" }
+       },
+       {
+         "name" : "Coldplay",
+         "Instagram" : { "Count" : "8,200,000", "Description" : "8.2 Million" },
+         "Twitter" : { "Count" : "22,000,000", "Description" : "22 Million" }
+       },
+       {
+         "name" : "Radiohead",
+         "Instagram" : { "Count" : "1,100,000", "Description" : "1.1 Million" },
+         "Twitter" : { "Count" : "1,870,000", "Description" : "1.9 Million" }
+       },
+       {
+         "name" : "Fall Out Boy",
+         "Instagram" : { "Count" : "2,700,000", "Description" : "2.7 Million" },
+         "Twitter" : { "Count" : "2,320,000", "Description" : "2.3 Million" }
+       },
+       {
+         "name" : "The Chainsmokers",
+         "Instagram" : { "Count" : "4,300,000", "Description" : "4.3 Million" },
+         "Twitter" : { "Count" : "1,740,000", "Description" : "1.7 Million" }
+       },
+       {
+         "name" : "Imagine Dragons",
+         "Instagram" : { "Count" : "2,400,000", "Description" : "2.4 Million" },
+         "Twitter" : { "Count" : "4,240,000", "Description" : "4.2 Million" }
+       },
+       {
+         "name" : "Skrillex",
+         "Instagram" : { "Count" : "7,900,000", "Description" : "7.9 Million" },
+         "Twitter" : { "Count" : "6,690,000", "Description" : "6.7 Million" }
+       },
+       {
+         "name" : "Pearl Jam",
+         "Instagram" : { "Count" : "1,200,000", "Description" : "1.2 Million" },
+         "Twitter" : { "Count" : "3,570,000", "Description" : "3.6 Million" }
+       },
+       {
+         "name" : "U2",
+         "Instagram" : { "Count" : "1,400,000", "Description" : "1.4 Million" },
+         "Twitter" : { "Count" : "1,260,000", "Description" : "1.3 Million" }
+       },
+       {
+         "name" : "Tyga",
+         "Instagram" : { "Count" : "12,400,000", "Description" : "12.4 Million" },
+         "Twitter" : { "Count" : "7,030,000", "Description" : "7 Million" }
+       },
+       {
+         "name" : "Paramore",
+         "Instagram" : { "Count" : "1,800,000", "Description" : "1.8 Million" },
+         "Twitter" : { "Count" : "4,610,000", "Description" : "4.6 Million" }
+       },
+       {
+         "name" : "Metallica",
+         "Instagram" : { "Count" : "3,500,000", "Description" : "3.5 Million" },
+         "Twitter" : { "Count" : "4,960,000", "Description" : "5 Million" }
+       },
+       {
+         "name" : "Michael Buble",
+         "Instagram" : { "Count" : "1,900,000", "Description" : "1.9 Million" },
+         "Twitter" : { "Count" : "2,430,000", "Description" : "2.4 Million" }
+       },
+       {
+         "name" : "Solange",
+         "Instagram" : { "Count" : "2,900,000", "Description" : "2.9 Million" },
+         "Twitter" : { "Count" : "3,430,000", "Description" : "3.4 Million" }
+       },
+       {
+         "name" : "One Direction",
+         "Instagram" : { "Count" : "17,500,000", "Description" : "17.5 Million" },
+         "Twitter" : { "Count" : "31,900,000", "Description" : "31.9 Million" }
+       },
+       {
+         "name" : "Miranda Lambert",
+         "Instagram" : { "Count" : "3,200,000", "Description" : "3.2 Million" },
+         "Twitter" : { "Count" : "6,660,000", "Description" : "6.7 Million" }
+       },
+       {
+         "name" : "Blake Shelton",
+         "Instagram" : { "Count" : "1,700,000", "Description" : "1.7 Million" },
+         "Twitter" : { "Count" : "19,700,000", "Description" : "19.7 Million" }
+       },
+       {
+         "name" : "Gwen Stefani",
+         "Instagram" : { "Count" : "6,900,000", "Description" : "6.9 Million" },
+         "Twitter" : { "Count" : "2,790,000", "Description" : "2.8 Million" }
+       },
+       {
+         "name" : "Adam Levine",
+         "Instagram" : { "Count" : "10,000,000", "Description" : "10 Million" },
+         "Twitter" : { "Count" : "7,610,000", "Description" : "7.6 Million" }
+       },
+       {
+         "name" : "Brad Paisley",
+         "Instagram" : { "Count" : "882,300", "Description" : "882 Thousand" },
+         "Twitter" : { "Count" : "4,200,000", "Description" : "4.2 Million" }
+       },
+       {
+         "name" : "Maroon 5",
+         "Instagram" : { "Count" : "5,100,000", "Description" : "5.1 Million" },
+         "Twitter" : { "Count" : "14,400,000", "Description" : "14.4 Million" }
+       },
+       {
+         "name" : "Alicia Keys",
+         "Instagram" : { "Count" : "10,600,000", "Description" : "10.6 Million" },
+         "Twitter" : { "Count" : "26,900,000", "Description" : "26.9 Million" }
+       },
+       {
+         "name" : "Luke Bryan",
+         "Instagram" : { "Count" : "3,700,000", "Description" : "3.7 Million" },
+         "Twitter" : { "Count" : "9,120,000", "Description" : "9.1 Million" }
+       },
+       {
+         "name" : "Keith Urban",
+         "Instagram" : { "Count" : "1,400,000", "Description" : "1.4 Million" },
+         "Twitter" : { "Count" : "3,610,000", "Description" : "3.6 Million" }
+       },
+       {
+         "name" : "Madonna",
+         "Instagram" : { "Count" : "9,700,000", "Description" : "9.7 Million" },
+         "Twitter" : { "Count" : "1,650,000", "Description" : "1.7 Million" }
+       },
+       {
+         "name" : "Kelly Clarkson",
+         "Instagram" : { "Count" : "2,400,000", "Description" : "2.4 Million" },
+         "Twitter" : { "Count" : "11,700,000", "Description" : "11.7 Million" }
+       },
+       {
+         "name" : "Britney Spears",
+         "Instagram" : { "Count" : "17,100,000", "Description" : "17.1 Million" },
+         "Twitter" : { "Count" : "55,100,000", "Description" : "55.1 Million" }
+       },
+       {
+         "name" : "50 Cent",
+         "Instagram" : { "Count" : "15,300,000", "Description" : "15.3 Million" },
+         "Twitter" : { "Count" : "9,160,000", "Description" : "9.2 Million" }
+       },
+       {
+         "name" : "Calvin Harris",
+         "Instagram" : { "Count" : "9,100,000", "Description" : "9.1 Million" },
+         "Twitter" : { "Count" : "10,900,000", "Description" : "10.9 Million" }
+       },
+       {
+         "name" : "Kendrick Lamar",
+         "Instagram" : { "Count" : "6,700,000", "Description" : "6.7 Million" },
+         "Twitter" : { "Count" : "8,750,000", "Description" : "8.8 Million" }
+       },
+       {
+         "name" : "2 Chainz",
+         "Instagram" : { "Count" : "3,700,000", "Description" : "3.7 Million" },
+         "Twitter" : { "Count" : "3,970,000", "Description" : "4 Million" }
+       },
+       {
+         "name" : "J Cole",
+         "Instagram" : { "Count" : "2,400,000", "Description" : "2.4 Million" },
+         "Twitter" : { "Count" : "9,710,000", "Description" : "9.7 Million" }
+       },
+       {
+         "name" : "Pharrell",
+         "Instagram" : { "Count" : "9,900,000", "Description" : "9.9 Million" },
+         "Twitter" : { "Count" : "10,300,000", "Description" : "10.3 Million" }
+       },
+       {
+         "name" : "Chris Brown",
+         "Instagram" : { "Count" : "39,700,000", "Description" : "39.7 Million" },
+         "Twitter" : { "Count" : "21,400,000", "Description" : "21.4 Million" }
+       },
+       {
+         "name" : "Big Sean",
+         "Instagram" : { "Count" : "8,900,000", "Description" : "8.9 Million" },
+         "Twitter" : { "Count" : "11,900,000", "Description" : "11.9 Million" }
+       },
+       {
+         "name" : "Trey Songz",
+         "Instagram" : { "Count" : "8,500,000", "Description" : "8.5 Million" },
+         "Twitter" : { "Count" : "11,900,000", "Description" : "11.9 Million" }
+       },
+       {
+         "name" : "Beyonce",
+         "Instagram" : { "Count" : "104,800,000", "Description" : "104.8 Million" },
+         "Twitter" : { "Count" : "15,000,000", "Description" : "15 Million" }
+       },
+       {
+         "name" : "Nicki Minaj",
+         "Instagram" : { "Count" : "81,800,000", "Description" : "81.8 Million" },
+         "Twitter" : { "Count" : "21,000,000", "Description" : "21 Million" }
+       },
+       {
+         "name" : "The Weeknd",
+         "Instagram" : { "Count" : "14,300,000", "Description" : "14.3 Million" },
+         "Twitter" : { "Count" : "5,930,000", "Description" : "5.9 Million" }
+       },
+       {
+         "name" : "Chance the Rapper",
+         "Instagram" : { "Count" : "6,000,000", "Description" : "6 Million" },
+         "Twitter" : { "Count" : "4,930,000", "Description" : "4.9 Million" }
+       },
+       {
+         "name" : "John Legend",
+         "Instagram" : { "Count" : "7,000,000", "Description" : "7 Million" },
+         "Twitter" : { "Count" : "9,590,000", "Description" : "9.6 Million" }
+       },
+       {
+         "name" : "Bruno Mars",
+         "Instagram" : { "Count" : "13,000,000", "Description" : "13 Million" },
+         "Twitter" : { "Count" : "31,800,000", "Description" : "31.8 Million" }
+       },
+       {
+         "name" : "Tim Mcgraw",
+         "Instagram" : { "Count" : "1,700,000", "Description" : "1.7 Million" },
+         "Twitter" : { "Count" : "2,870,000", "Description" : "2.9 Million" }
+       },
+       {
+         "name" : "Carrie Underwood",
+         "Instagram" : { "Count" : "6,100,000", "Description" : "6.1 Million" },
+         "Twitter" : { "Count" : "7,310,000", "Description" : "7.3 Million" }
+       },
+       {
+         "name" : "Gucci Mane",
+         "Instagram" : { "Count" : "5,500,000", "Description" : "5.5 Million" },
+         "Twitter" : { "Count" : "3,860,000", "Description" : "3.9 Million" }
+       },
+       {
+         "name" : "Sean Diddy Combs",
+         "Instagram" : { "Count" : "8,400,000", "Description" : "8.4 Million" },
+         "Twitter" : { "Count" : "12,400,000", "Description" : "12.4 Million" }
+       },
+       {
+         "name" : "Ciara",
+         "Instagram" : { "Count" : "16,700,000", "Description" : "16.7 Million" },
+         "Twitter" : { "Count" : "8,610,000", "Description" : "8.6 Million" }
+       },
+       {
+         "name" : "Rita Ora",
+         "Instagram" : { "Count" : "11,900,000", "Description" : "11.9 Million" },
+         "Twitter" : { "Count" : "6,350,000", "Description" : "6.4 Million" }
+       },
+       {
+         "name" : "Young Thug",
+         "Instagram" : { "Count" : "4,400,000", "Description" : "4.4 Million" },
+         "Twitter" : { "Count" : "1,740,000", "Description" : "1.7 Million" }
+       },
+       {
+         "name" : "Migos",
+         "Instagram" : { "Count" : "4,200,000", "Description" : "4.2 Million" },
+         "Twitter" : { "Count" : "1,440,000", "Description" : "1.4 Million" }
+       },
+       {
+         "name" : "Kesha",
+         "Instagram" : { "Count" : "2,100,000", "Description" : "2.1 Million" },
+         "Twitter" : { "Count" : "3,780,000", "Description" : "3.8 Million" }
+       },
+       {
+         "name" : "Zedd",
+         "Instagram" : { "Count" : "4,800,000", "Description" : "4.8 Million" },
+         "Twitter" : { "Count" : "5,350,000", "Description" : "5.4 Million" }
+       },
+       {
+         "name" : "Lorde",
+         "Instagram" : { "Count" : "5,300,000", "Description" : "5.3 Million" },
+         "Twitter" : { "Count" : "5,290,000", "Description" : "5.3 Million" }
+       },
+       {
+         "name" : "Carly Rae Jepsen",
+         "Instagram" : { "Count" : "1,600,000", "Description" : "1.6 Million" },
+         "Twitter" : { "Count" : "11,000,000", "Description" : "11 Million" }
+       },
+       {
+         "name" : "Snoop Dogg",
+         "Instagram" : { "Count" : "18,400,000", "Description" : "18.4 Million" },
+         "Twitter" : { "Count" : "17,100,000", "Description" : "17.1 Million" }
+       },
+       {
+         "name" : "Ludacris",
+         "Instagram" : { "Count" : "8,800,000", "Description" : "8.8 Million" },
+         "Twitter" : { "Count" : "12,000,000", "Description" : "12 Million" }
+       },
+       {
+         "name" : "Rick Ross",
+         "Instagram" : { "Count" : "6,800,000", "Description" : "6.8 Million" },
+         "Twitter" : { "Count" : "3,470,000", "Description" : "3.5 Million" }
        }
-       /**
-       50 Cent, Calvin Harris, Kendrick Lamar, 2 Chainz, J Cole, Daft Punk, Pharrel, Chris Brown,
-       Big Sean, Trey Songz, Beyonce, Nicki Minaj, The Weeknd, Chance the Rapper, John Legend, Bruno Mars,
-       Tim Mcgraw, Carrie Underwood, Miranda Lambert, Garth Brooks, Blake Shelton, Gwen Stefani, Adam Levine,
-       Kenny Chesney, Brad Paisley, Toby Keith, Alicia Keys, Sam Hunt, Luke Bryan, Keith Urban, Madonna,
-       Kelly Clarkson, Britney Spears, John Mayer, ASAP Rocky, Jason Aldean, Eric Church, Pink, DJ Khaled,
-       Ed Sheeran, Ellie Goulding, Shawn Mendes, Kylie Minogue, Future, David Guetta, Mac Miller, Mariah Carey,
-       Macklemore, Iggy Azalea, Harry Styles, Zayn, Wale, Meek Mill, Frank Ocean, Lana Del Rey, Sia, Josh Groban,
-       Diplo, Steve Aoki, Lil Yachty, Damian Marley, Ice Cube, Blink 182, Coldplay, Radiohead, Fall Out Boy,
-       The Chainsmokers, Imagine Dragons, Skrillex, Pearl Jam, U2, Tyga, Paramore, Metallica, Michael Buble,
-       Solange, One Direction,
-       */
      ],
+
      "SOCIAL_NETWORKS" : [
        "Instagram", "Twitter"
-     ],
-     "QUESTIONS_EN_US" : [
-         {
-             "Reindeer have very thick coats, how many hairs per square inch do they have?": [
-                 "13,000",
-                 "1,200",
-                 "5,000",
-                 "700",
-                 "1,000",
-                 "120,000"
-             ]
-         },
-         {
-             "The 1964 classic Rudolph The Red Nosed Reindeer was filmed in. ": [
-                 "Japan",
-                 "United States",
-                 "Finland",
-                 "Germany",
-                 "Canada",
-                 "Norway",
-                 "France"
-             ]
-         },
-         {
-             "Santas reindeer are cared for by one of the Christmas elves, what is his name?": [
-                 "Wunorse Openslae",
-                 "Alabaster Snowball",
-                 "Bushy Evergreen",
-                 "Pepper Minstix"
-             ]
-         },
-         {
-             "If all of Santas reindeer had antlers while pulling his Christmas sleigh, they would all be": [
-                 "Girls",
-                 "Boys",
-                 "Girls and boys",
-                 "No way to tell"
-             ]
-         },
-         {
-             "What do Reindeer eat?": [
-                 "Lichen",
-                 "Grasses",
-                 "Leaves",
-                 "Berries"
-             ]
-         },
-         {
-             "What of the following is not true?": [
-                 "Caribou live on all continents",
-                 "Both reindeer and Caribou are the same species",
-                 "Caribou are bigger than reindeer",
-                 "Reindeer live in Scandinavia and Russia"
-             ]
-         },
-         {
-             "In what year did Rudolph make his television debut?": [
-                 "1964",
-                 "1979",
-                 "2000",
-                 "1956"
-             ]
-         },
-         {
-             "Who was the voice of Rudolph in the 1964 classic?": [
-                 "Billie Mae Richards",
-                 "Burl Ives",
-                 "Paul Soles",
-                 "Lady Gaga"
-             ]
-         },
-         {
-             "In 1939 what retailer used the story of Rudolph the Red Nose Reindeer?": [
-                 "Montgomery Ward",
-                 "Sears",
-                 "Macys",
-                 "Kmart"
-             ]
-         },
-         {
-             "Santa\'s reindeer named Donner was originally named what?": [
-                 "Dunder",
-                 "Donny",
-                 "Dweedle",
-                 "Dreamy"
-             ]
-         },
-         {
-             "Who invented the story of Rudolph?": [
-                 "Robert May",
-                 "Johnny Marks",
-                 "Santa",
-                 "J.K. Rowling"
-             ]
-         },
-         {
-             "In what location will you not find reindeer?": [
-                 "North Pole",
-                 "Lapland",
-                 "Korvatunturi mountain",
-                 "Finland"
-             ]
-         },
-         {
-             "What Makes Santa\'s Reindeer Fly?": [
-                 "Magical Reindeer Dust",
-                 "Fusion",
-                 "Amanita muscaria",
-                 "Elves"
-             ]
-         },
-         {
-             "Including Rudolph, how many reindeer hooves are there?": [
-                 "36",
-                 "24",
-                 "16",
-                 "8"
-             ]
-         },
-         {
-             "Santa only has one female reindeer. Which one is it?": [
-                 "Vixen",
-                 "Clarice",
-                 "Cupid",
-                 "Cupid"
-             ]
-         },
-         {
-             "In the 1964 classic Rudolph The Red Nosed Reindeer, what was the snowman narrators name?": [
-                 "Sam",
-                 "Frosty",
-                 "Burl",
-                 "Snowy"
-             ]
-         },
-         {
-             "What was Rudolph\'s father\'s name?": [
-                 "Donner",
-                 "Dasher",
-                 "Blixen",
-                 "Comet"
-             ]
-         },
-         {
-             "In the 1964 movie, What was the name of the coach of the Reindeer Games?": [
-                 "Comet",
-                 "Blixen",
-                 "Donner",
-                 "Dasher"
-             ]
-         },
-         {
-             "In the 1964 movie, what is the name of the deer that Rudolph befriends at the reindeer games?": [
-                 "Fireball",
-                 "Clarice",
-                 "Jumper",
-                 "Vixen"
-             ]
-         },
-         {
-             "In the 1964 movie, How did Donner, Rudolph\'s father, try to hide Rudolph\'s nose?": [
-                 "Black mud",
-                 "Bag",
-                 "Pillow case",
-                 "Sock"
-             ]
-         },
-         {
-             "In the 1964 movie, what does the Misfit Elf want to be instead of a Santa Elf?": [
-                 "Dentist",
-                 "Reindeer",
-                 "Toy maker",
-                 "Candlestick maker"
-             ]
-         },
-         {
-             "In the 1964 movie,what was the Bumble\'s one weakness?": [
-                 "Could not swim",
-                 "Always hungry",
-                 "Candy canes",
-                 "Cross eyed"
-             ]
-         },
-         {
-             "In the 1964 movie, what is Yukon Cornelius really in search of?": [
-                 "Peppermint",
-                 "Gold",
-                 "India",
-                 "Polar Bears"
-             ]
-         },
-         {
-             "In the 1964 movie, why is the train on the Island of Misfit Toys?": [
-                 "Square wheels",
-                 "No Engine",
-                 "Paint does not match",
-                 "It does not toot"
-             ]
-         },
-         {
-             "In the 1964 movie, what is the name of the Jack in the Box?": [
-                 "Charlie",
-                 "Sam",
-                 "Billy",
-                 "Jack"
-             ]
-         },
-         {
-             "In the 1964 movie, why did Santa Claus almost cancel Christmas?": [
-                 "Storm",
-                 "No snow",
-                 "No toys",
-                 "The Reindeer were sick"
-             ]
-         },
-         {
-             "In the 1964 movie, what animal noise did the elf make to distract the Bumble?": [
-                 "Oink",
-                 "Growl",
-                 "Bark",
-                 "Meow"
-             ]
-         },
-         {
-             "In the 1964 movie, what is the name of the prospector?": [
-                 "Yukon Cornelius",
-                 "Slider Sam",
-                 "Bumble",
-                 "Jack"
-             ]
-         },
-         {
-             "How far do reindeer travel when they migrate?": [
-                 "3000 miles",
-                 "700 miles",
-                 "500 miles",
-                 "0 miles"
-             ]
-         },
-         {
-             "How fast can a reindeer run?": [
-                 "48 miles per hour",
-                 "17 miles per hour",
-                 "19 miles per hour",
-                 "14 miles per hour",
-                 "52 miles per hour",
-                 "41 miles per hour"
-             ]
-         }
      ]
 };

@@ -69,119 +69,907 @@
     {
       "name": "PopularEntity",
       "values": [
-        {
-          "id": null,
-          "name": {
-            "value": "Selena Gomez",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Rihanna",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Ariana Grande",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Katy Perry",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Taylor Swift",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Justin Bieber",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Shakira",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Lady Gaga",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Jennifer Lopez",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Miley Cyrus",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Lil Wayne",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Wiz Khalifa",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Drake",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Justin Timberlake",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Demi Lovato",
-            "synonyms": []
-          }
-        },
-        {
-          "id": null,
-          "name": {
-            "value": "Adele",
-            "synonyms": []
-          }
-        }
+  {
+    "id": null,
+    "name": {
+      "value": "Katy Perry",
+      "synonyms": [
+
       ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Taylor Swift",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Selena Gomez",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ariana Grande",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Justin Bieber",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Lady Gaga",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Rihanna",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Shakira",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Miley Cyrus",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Jennifer Lopez",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Lil Wayne",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Wiz Khalifa",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Drake",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Justin Timberlake",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Demi Lovato",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Adele",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "John Mayer",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "ASAP Rocky",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Jason Aldean",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Eric Church",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Pink",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "DJ Khaled",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ed Sheeran",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ellie Goulding",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Shawn Mendes",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Kylie Minogue",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Future",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "David Guetta",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Mac Miller",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Mariah Carey",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Macklemore",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Iggy Azalea",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Harry Styles",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Zayn",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Wale",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Meek Mill",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Tyler, the Creator",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Lana Del Rey",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Sia",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Diplo",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Steve Aoki",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Lil Yachty",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ice Cube",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Blink 182",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Coldplay",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Radiohead",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Fall Out Boy",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "The Chainsmokers",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Imagine Dragons",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Skrillex",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Pearl Jam",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "U2",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Tyga",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Paramore",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Metallica",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Michael Buble",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Solange",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "One Direction",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Miranda Lambert",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Blake Shelton",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Gwen Stefani",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Adam Levine",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Brad Paisley",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Maroon 5",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Alicia Keys",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Luke Bryan",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Keith Urban",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Madonna",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Kelly Clarkson",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Britney Spears",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "50 Cent",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Calvin Harris",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Kendrick Lamar",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "2 Chainz",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "J Cole",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Pharrell",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Chris Brown",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Big Sean",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Trey Songz",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Beyonce",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Nicki Minaj",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "The Weeknd",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Chance the Rapper",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "John Legend",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Bruno Mars",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Tim Mcgraw",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Carrie Underwood",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Gucci Mane",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Sean Diddy Combs",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ciara",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Rita Ora",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Young Thug",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Migos",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Kesha",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Zedd",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Lorde",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Carly Rae Jepsen",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Snoop Dogg",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Ludacris",
+      "synonyms": [
+
+      ]
+    }
+  },
+  {
+    "id": null,
+    "name": {
+      "value": "Rick Ross",
+      "synonyms": [
+
+      ]
+    }
+  }
+]
     }
   ]
 }
