@@ -1,0 +1,187 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.NoIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.RepeatIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StartOverIntent",
+      "samples": [
+        "start game",
+        "new game",
+        "start",
+        "start new game"
+      ]
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.YesIntent",
+      "samples": []
+    },
+    {
+      "name": "AnswerIntent",
+      "samples": [
+        "the answer is {Answer}",
+        "my answer is {Answer}",
+        "is it {Answer}",
+        "{Answer} is my answer",
+        "{Answer}"
+      ],
+      "slots": [
+        {
+          "name": "Answer",
+          "type": "PopularEntity",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "DontKnowIntent",
+      "samples": [
+        "i don't know",
+        "don't know",
+        "skip",
+        "i don't know that",
+        "who knows",
+        "i don't know this question",
+        "i don't know that one",
+        "dunno"
+      ],
+      "slots": []
+    }
+  ],
+  "types": [
+    {
+      "name": "PopularEntity",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Selena Gomez",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Rihanna",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Ariana Grande",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Katy Perry",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Taylor Swift",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Justin Bieber",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Shakira",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Lady Gaga",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Jennifer Lopez",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Miley Cyrus",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Lil Wayne",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Wiz Khalifa",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Drake",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Justin Timberlake",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Demi Lovato",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Adele",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ]
+}
