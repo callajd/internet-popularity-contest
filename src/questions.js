@@ -14,12 +14,12 @@ module.exports = {
      "ACCOUNTS" : [
        {
          "name" : "Katy Perry",
-         "Instagram" : { "Count" : "66,700,000", "Description" : "66.7 Million" },
+         "Instagram" : { "Count" : "66700000", "Description" : "66.7 Million" },
          "Twitter" : { "Count" : "101,000,000", "Description" : "101 Million" }
        },
        {
          "name" : "Taylor Swift",
-         "Instagram" : { "Count" : "102,000,000", "Description" : "102 Million" },
+         "Instagram" : { "Count" : "102000000", "Description" : "102 Million" },
          "Twitter" : { "Count" : "85,400,000", "Description" : "85.4 Million" }
        },
        {
