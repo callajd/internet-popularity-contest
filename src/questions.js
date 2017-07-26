@@ -11,6 +11,59 @@ module.exports = {
        "Does NAME_ONE or NAME_TWO have more SOCIAL_NETWORK followers?"
      ],
 
+     "CORRECT_TEMPLATES" : [
+       "That's right.",
+       "You got that one.",
+       "Yaaaaaaas.",
+       "Bingo.",
+       "Yep.",
+       "OK OK that's right.",
+       "Nice work!"
+     ],
+
+     "CORRECT_EMOJI" : [
+       "👍",
+       "👌",
+       "👯",
+       "🎯",
+       "✅",
+       "💫"
+     ],
+
+     "INCORRECT_TEMPLATES" : [
+       "Wrong!",
+       "Nope!",
+       "Not this time.",
+       "Check your math.",
+       "No way!",
+       "Oh come on.",
+       "You can do better than that."
+     ],
+
+     "INCORRECT_EMOJI" : [
+       "👎",
+       "❌",
+       "🤦",
+       "🙈",
+       "🤷",
+       "😡"
+     ],
+     
+     "CARD_CONTENT_TEMPLATES" : [
+        "Coming in with FOLLOWER_COUNT SOCIAL_NETWORK followers, NAME_ONE beats NAME_TWO.",
+        "NAME_ONE, with FOLLOWER_COUNT followers on SOCIAL_NETWORK, is more popular than NAME_TWO.",
+        "NAME_TWO can't come close to the FOLLOWER_COUNT followers NAME_ONE has on SOCIAL_NETWORK.",
+        "What can NAME_ONE say?  FOLLOWER_COUNT followers is more than NAME_TWO has on SOCIAL_NETWORK.",
+        "NAME_TWO got nothing on the FOLLOWER_COUNT SOCIAL_NETWORK followers of NAME_ONE."
+     ],
+
+     "DETAIL_TEMPLATES" : [
+       "With FOLLOWER_COUNT followers on SOCIAL_NETWORK, NAME_ONE takes the prize.",
+       "NAME_ONE wins this popularity contest with FOLLOWER_COUNT followers on SOCIAL_NETWORK.",
+       "The grand prize winner of more followers on SOCIAL_NETWORK is NAME_ONE with FOLLOWER_COUNT followers.",
+       "Coming in at FOLLOWER_COUNT followers, NAME_ONE has more followers on SOCIAL_NETWORK."
+     ],
+
      "ACCOUNTS" : [
        {
          "name" : "Katy Perry",
