@@ -40,7 +40,7 @@ var languageString = {
 
             "CARD_ANSWER_TEXT": "%s has %s %s followers.",
 
-            "SCORE5": "Please slowly step away from the social media.",
+            "SCORE5": "<prosody rate=\"x-slow\">Please slowly step away from the social media.</prosody>",
             "SCORE4": "Not bad I guess, unless you're a perfectionist like I am.",
             "SCORE3": "I've never really been a big fan of mediocrity myself.",
             "SCORE2": "That's closer to getting none right than it is getting them all right.",
@@ -127,33 +127,60 @@ var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
     "StartGame": function (newGame) {
         var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE", GAME_LENGTH.toString()) : "";
 
-        var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1);
+/*        var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1)[0];
         var accounts = getRandomElements(this.t("ACCOUNTS"), 2);
-        var socialNetwork = getRandomElements(this.t("SOCIAL_NETWORKS"), 1);
-
-        var repromptText = question[0].replace("NAME_ONE", accounts[0].name).replace("NAME_TWO", accounts[1].name).replace("SOCIAL_NETWORK", socialNetwork[0]);
+        var socialNetwork = getRandomElements(this.t("SOCIAL_NETWORKS"), 1)[0];
 
         var sortedAccounts = accounts.sort(function(a, b) {
                                                return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
                                            });
+
+        var repromptText = question.replace("NAME_ONE", accounts[0].name)
+                                   .replace("NAME_TWO", accounts[1].name)
+                                   .replace("SOCIAL_NETWORK", socialNetwork);
 
         speechOutput += repromptText;
 
         Object.assign(this.attributes, {
             "speechOutput": repromptText,
             "repromptText": repromptText,
-            "currentQuestionIndex": 0,
             "score": 0,
+            "questionCount": 0,
             "correctAccount" : sortedAccounts[1],
             "incorrectAccount" : sortedAccounts[0],
             "socialNetwork" : socialNetwork
-        });
-
+        }); */
+        writeAttributes(this, /* score */ 0, /* questionCount */ 0);
+        speechOutput += this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
-        this.emit(":ask", speechOutput, repromptText);
+        this.emit(":ask", speechOutput, this.attributes.repromptText);
     }
 });
+
+function writeAttributes(target, score, questionCount) {
+  var question = getRandomElements(target.t("QUESTION_TEMPLATES"), 1)[0];
+  var accounts = getRandomElements(target.t("ACCOUNTS"), 2);
+  var socialNetwork = getRandomElements(target.t("SOCIAL_NETWORKS"), 1)[0];
+
+  var sortedAccounts = accounts.sort(function(a, b) {
+                                         return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
+                                     });
+
+  var repromptText = question.replace("NAME_ONE", accounts[0].name)
+                             .replace("NAME_TWO", accounts[1].name)
+                             .replace("SOCIAL_NETWORK", socialNetwork);
+
+  Object.assign(target.attributes, {
+      "speechOutput": repromptText,
+      "repromptText": repromptText,
+      "score": score,
+      "questionCount": questionCount,
+      "correctAccount" : sortedAccounts[1],
+      "incorrectAccount" : sortedAccounts[0],
+      "socialNetwork" : socialNetwork
+  });
+}
 
 var triviaStateHandlers = Alexa.CreateStateHandler(GAME_STATES.TRIVIA, {
     "AnswerIntent": function () {
@@ -239,88 +266,68 @@ var helpStateHandlers = Alexa.CreateStateHandler(GAME_STATES.HELP, {
 });
 
 function handleUserGuess(userGaveUp) {
-    var answerSlotValid = isAnswerSlotValid(this.event.request.intent);
+
     var speechOutput = "";
     var speechOutputAnalysis = "";
-    var gameQuestions = this.attributes.questions;
-    var correctAnswerIndex = parseInt(this.attributes.correctAnswerIndex);
-    var currentScore = parseInt(this.attributes.score);
-    var currentQuestionIndex = parseInt(this.attributes.currentQuestionIndex);
-    var correctAnswerText = this.attributes.correctAnswerText;
-    var translatedQuestions = this.t("QUESTIONS");
+    var questionCount = parseInt(this.attributes.questionCount) + 1;
+    var score = parseInt(this.attributes.score);
     var previousQuestion = this.attributes.repromptText;
-    var userWasCorrect = false;
+    var userWasCorrect = this.event.request.intent.slots.Answer.value.toLowerCase() == this.attributes.correctAccount.name.toLowerCase();
+    var card = getCard(this.attributes.correctAccount,
+                       this.attributes.incorrectAccount,
+                       this.attributes.socialNetwork,
+                       userWasCorrect);
 
-    if (this.event.request.intent.slots.Answer.value.toLowerCase() == this.attributes.correctAccount.name.toLowerCase()) {
-        currentScore++;
-        userWasCorrect = true;
+    if (userWasCorrect) {
+        score++;
         speechOutputAnalysis = this.t("ANSWER_CORRECT_MESSAGE");
     } else {
         if (!userGaveUp) {
             speechOutputAnalysis = this.t("ANSWER_WRONG_MESSAGE");
         }
-
         speechOutputAnalysis += this.t("CORRECT_ANSWER_MESSAGE", this.attributes.correctAccount.name);
     }
 
     // Check if we can exit the game session after GAME_LENGTH questions (zero-indexed)
-    if (this.attributes["currentQuestionIndex"] == GAME_LENGTH - 1) {
+    if (questionCount == GAME_LENGTH) {
+
         speechOutput = userGaveUp ? "" : this.t("ANSWER_IS_MESSAGE");
-        var scoreRemark = this.t("SCORE" + currentScore.toString());
-        speechOutput += speechOutputAnalysis + this.t("GAME_OVER_MESSAGE", currentScore.toString(), GAME_LENGTH.toString(), scoreRemark);
+        var scoreRemark = this.t("SCORE" + score.toString());
+        speechOutput += speechOutputAnalysis + this.t("GAME_OVER_MESSAGE", score.toString(), GAME_LENGTH.toString(), scoreRemark);
 
-        var previousAccount = this.attributes.correctAccount;
-        var cardAnswerText = this.t("CARD_ANSWER_TEXT", previousAccount.name, previousAccount[this.attributes.previousSocialNetwork].Description, this.attributes.previousSocialNetwork);
-
-        /*var cardImage = {
-                          //"smallImageUrl" : "https://s3.amazonaws.com/internet-popularity-contest/lilwayne_small.png",
-                          //"smallImageUrl" : "https://pbs.twimg.com/profile_images/712863751/lil-wayne-gq-2_400x400.jpg",
-                          "smallImageUrl" : "https://scontent-sea1-1.cdninstagram.com/t51.2885-19/11085128_896424373733633_1338923514_a.jpg",
-                          "largeImageUrl" : "https://s3.amazonaws.com/internet-popularity-contest/lilwayne_large.png"
-                        }; */
-        this.emit(":tellWithCard", speechOutput, cardAnswerText, previousQuestion/*, cardImage */);
+        this.emit(":tellWithCard", speechOutput, card.Title, card.Content);
     } else {
-        currentQuestionIndex++;
 
-        // First, build card from previous round
-
-        var card = getCard(this.attributes.correctAccount, this.attributes.incorrectAccount, this.attributes.socialNetwork, userWasCorrect);
-
-        // Then, build next question and answer
-
-        var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1)[0];
+        // Build next question and answer
+        /*var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1)[0];
         var accounts = getRandomElements(this.t("ACCOUNTS"), 2);
         var socialNetwork = getRandomElements(this.t("SOCIAL_NETWORKS"), 1)[0];
 
-        var repromptText = question.replace("NAME_ONE", accounts[0].name).replace("NAME_TWO", accounts[1].name).replace("SOCIAL_NETWORK", socialNetwork);
-
+        // Lazy way to get the accounts in ascending order
         var sortedAccounts = accounts.sort(function(a, b) {
                                                return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
                                            });
+
+        var repromptText = question.replace("NAME_ONE", accounts[0].name)
+                                   .replace("NAME_TWO", accounts[1].name)
+                                   .replace("SOCIAL_NETWORK", socialNetwork);
 
         speechOutput += speechOutputAnalysis + " " + repromptText;
 
         Object.assign(this.attributes, {
             "speechOutput": repromptText,
             "repromptText": repromptText,
-            "currentQuestionIndex": currentQuestionIndex,
-            "questions": gameQuestions,
-            "score": currentScore,
-            "correctAnswerText": sortedAccounts[1].name,
+            "score": score,
+            "questionCount": questionCount,
             "correctAccount": sortedAccounts[1],
             "incorrectAccount": sortedAccounts[0],
-            "previousSocialNetwork" : socialNetwork
-        });
-
+            "socialNetwork" : socialNetwork
+        });*/
+        writeAttributes(this, score, questionCount);
+        speechOutput += speechOutputAnalysis + " " + this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
-        var cardImage = {
-                          //"smallImageUrl" : "https://s3.amazonaws.com/internet-popularity-contest/lilwayne_small.png",
-                          //"smallImageUrl" : "https://pbs.twimg.com/profile_images/712863751/lil-wayne-gq-2_400x400.jpg",
-                          "smallImageUrl" : "https://scontent-sea1-1.cdninstagram.com/t51.2885-19/11085128_896424373733633_1338923514_a.jpg",
-                          "largeImageUrl" : "https://s3.amazonaws.com/internet-popularity-contest/lilwayne_large.png"
-                        };
-        this.emit(":askWithCard", speechOutput, repromptText, card.Title, card.Content/*, cardImage*/);
+        this.emit(":askWithCard", speechOutput, this.attributes.repromptText, card.Title, card.Content);
     }
 }
 
@@ -329,6 +336,7 @@ function getCard(answer, wrongAnswer, socialNetwork, userWasCorrect) {
     "Title" : "",
     "Content": ""
   };
+
   if(userWasCorrect) {
     var emoji = getRandomElements(questions["CORRECT_EMOJI"], 1)[0];
     var titleMessage = getRandomElements(questions["CORRECT_TEMPLATES"], 1)[0];
@@ -348,33 +356,6 @@ function getCard(answer, wrongAnswer, socialNetwork, userWasCorrect) {
   return card;
 }
 
-function populateGameQuestions(translatedQuestions) {
-    var gameQuestions = [];
-    var indexList = [];
-    var index = translatedQuestions.length;
-
-    if (GAME_LENGTH > index){
-        throw new Error("Invalid Game Length.");
-    }
-
-    for (var i = 0; i < translatedQuestions.length; i++){
-        indexList.push(i);
-    }
-
-    // Pick GAME_LENGTH random questions from the list to ask the user, make sure there are no repeats.
-    for (var j = 0; j < GAME_LENGTH; j++){
-        var rand = Math.floor(Math.random() * index);
-        index -= 1;
-
-        var temp = indexList[index];
-        indexList[index] = indexList[rand];
-        indexList[rand] = temp;
-        gameQuestions.push(indexList[index]);
-    }
-
-    return gameQuestions;
-}
-
 function getRandomElements(array, count) {
   if(count > array.length) {
     throw new Error("Count cannot be greater than the length of the array.");
@@ -390,8 +371,4 @@ function getRandomElements(array, count) {
   }
 
   return shuffledArray.slice(0, count);
-}
-
-function isAnswerSlotValid(intent) {
-    return true;
 }
