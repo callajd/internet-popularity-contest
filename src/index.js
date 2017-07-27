@@ -74,18 +74,18 @@ exports.handler = function(event, context, callback) {
     alexa.appId = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageString;
-    alexa.registerHandlers(newSessionHandlers, startStateHandlers, triviaStateHandlers, helpStateHandlers);
+    alexa.registerHandlers(newSessionHandlers, selectModeStateHandlers, startStateHandlers, triviaStateHandlers, helpStateHandlers);
     alexa.execute();
 };
 
 var newSessionHandlers = {
     "LaunchRequest": function () {
         this.handler.state = GAME_STATES.SELECT_MODE;
-        this.emitWithState("SelectMode");
+        this.emitWithState("SelectMode", true);
     },
     "AMAZON.StartOverIntent": function() {
-        this.handler.state = GAME_STATES.START;
-        this.emitWithState("StartGame", true);
+        this.handler.state = GAME_STATES.SELECT_MODE;
+        this.emitWithState("SelectMode", false);
     },
     "AMAZON.HelpIntent": function() {
         this.handler.state = GAME_STATES.HELP;
@@ -97,28 +97,30 @@ var newSessionHandlers = {
     }
 };
 
-var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
-    "StartGame": function (newGame) {
-        var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
-
-        writeAttributes(this, /* score */ 0, /* questionCount */ 0);
-        speechOutput += this.attributes.speechOutput;
-        // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
-        this.handler.state = GAME_STATES.TRIVIA;
-
-        this.emit(":ask", speechOutput, this.attributes.repromptText);
-    }
-});
-
 var selectModeStateHandlers = Alexa.CreateStateHandler(GAME_STATES.SELECT_MODE, {
-    "SelectMode" : function () {
-      var speechOutput = this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE");
+    "SelectMode" : function (onLaunch) {
+      var speechOutput = onLaunch ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
       var repromptText = "Would you like to play a standard game or play in streak mode?";
       speechOutput += repromptText;
 
       this.handler.state = GAME_STATES.START;
 
       this.emit(":ask", speechOutput, repromptText);
+    }
+});
+
+var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
+    "StartGame": function (newGame) {
+        var gameMode = this.event.request.intent.slots.GameMode.value;
+        var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
+
+        Object.assign(this.attributes, )
+        writeAttributes(this, gameMode, /* score */ 0, /* questionCount */ 0);
+        speechOutput += this.attributes.speechOutput;
+        // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
+        this.handler.state = GAME_STATES.TRIVIA;
+
+        this.emit(":ask", speechOutput, this.attributes.repromptText);
     }
 });
 
@@ -238,7 +240,7 @@ function handleUserGuess(userGaveUp) {
         this.emit(":tellWithCard", speechOutput, card.Title, card.Content);
     } else {
 
-        writeAttributes(this, score, questionCount);
+        writeAttributes(this, this.attributes.gameMode, score, questionCount);
         speechOutput += speechOutputAnalysis + " " + this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
@@ -246,7 +248,7 @@ function handleUserGuess(userGaveUp) {
     }
 }
 
-function writeAttributes(target, score, questionCount) {
+function writeAttributes(target, gameMode, score, questionCount) {
   var question = getRandomElements(target.t("QUESTION_TEMPLATES"), 1)[0];
   var accounts = getRandomElements(target.t("ACCOUNTS"), 2);
   var socialNetwork = getRandomElements(target.t("SOCIAL_NETWORKS"), 1)[0];
@@ -262,6 +264,7 @@ function writeAttributes(target, score, questionCount) {
   Object.assign(target.attributes, {
       "speechOutput": repromptText,
       "repromptText": repromptText,
+      "gameMode": gameMode,
       "score": score,
       "questionCount": questionCount,
       "correctAccount" : sortedAccounts[1],
