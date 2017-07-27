@@ -3,8 +3,9 @@ var APP_ID = "amzn1.ask.skill.546859eb-0fc8-4116-93eb-432a6867c816";
 
 var GAME_LENGTH = 5;  // The number of questions per trivia game.
 var GAME_STATES = {
+    SELECT_MODE: "_SELECTMODE"
+    START: "_STARTMODE", // Setup and start the game.
     TRIVIA: "_TRIVIAMODE", // Asking trivia questions.
-    START: "_STARTMODE", // Entry point, start the game.
     HELP: "_HELPMODE" // The user is asking for help.
 };
 var questions = require("./questions");
@@ -17,24 +18,30 @@ var languageString = {
             "SOCIAL_NETWORKS" : questions["SOCIAL_NETWORKS"],
             "QUESTIONS" : questions["QUESTIONS_EN_US"],
             "GAME_NAME" : "Internet Popularity Contest",
+
             "HELP_MESSAGE": "I will ask you who has more followers on a specific social network.  Respond with the name of who you think has the most followers on that social network. " +
             " For example, say Katy Perry. To start a new game at any time, say, start game. ",
-            "REPEAT_QUESTION_MESSAGE": "To repeat the last question, say, repeat. ",
-            "ASK_MESSAGE_START": "Would you like to start playing?",
             "HELP_REPROMPT": "To give an answer to a question, respond with the name of who you think has the most followers on that social network. ",
+            "REPEAT_QUESTION_MESSAGE": "To repeat the last question, say, repeat. ",
+
+            "ASK_MESSAGE_START": "Would you like to start playing?",
             "STOP_MESSAGE": "Would you like to keep playing?",
             "CANCEL_MESSAGE": "Ok, let\'s play again soon.",
             "NO_MESSAGE": "Ok, we\'ll play another time. Goodbye!",
+
             "TRIVIA_UNHANDLED": "Try saying one of the given names.",
             "HELP_UNHANDLED": "Say yes to continue, or no to end the game.",
             "START_UNHANDLED": "Say start to start a new game.",
-            "NEW_GAME_MESSAGE": "It's time to play the great %s! ",
+
+            "NEW_GAME_MESSAGE": "This is the great Internet Popularity Contest!",
             "WELCOME_MESSAGE": "I will ask you some multiple choice questions, just say your answer's name. Let's do this.  ",
+
             "ANSWER_CORRECT_MESSAGE": "correct. ",
             "ANSWER_WRONG_MESSAGE": "wrong. ",
             "CORRECT_ANSWER_MESSAGE": "It's %s. ",
             "ANSWER_IS_MESSAGE": "That answer is ",
             "TELL_QUESTION_MESSAGE": "Question %s. %s ",
+
             "GAME_OVER_MESSAGE": "You got %s out of %s questions correct.  %s",
             "SCORE_IS_MESSAGE": "Your score is %s. ",
 
@@ -54,42 +61,9 @@ var languageString = {
           "ACCOUNTS" : questions["ACCOUNTS"],
           "SOCIAL_NETWORKS" : questions["SOCIAL_NETWORKS"],
           "QUESTIONS" : questions["QUESTIONS_EN_US"],
-            "GAME_NAME" : "Internet Popularity Contest"
+          "GAME_NAME" : "Internet Popularity Contest"
         }
-    }/**,
-    "en-GB": {
-        "translation": {
-            "QUESTIONS" : questions["QUESTIONS_EN_GB"],
-            "GAME_NAME" : "Internet Popularity Contest" // Be sure to change this for your skill.
-        }
-    },
-    "de": {
-        "translation": {
-            "QUESTIONS" : questions["QUESTIONS_DE_DE"],
-            "GAME_NAME" : "Wissenswertes über Rentiere in Deutsch", // Be sure to change this for your skill.
-            "HELP_MESSAGE": "Ich stelle dir %s Multiple-Choice-Fragen. Antworte mit der Zahl, die zur richtigen Antwort gehört. " +
-            "Sage beispielsweise eins, zwei, drei oder vier. Du kannst jederzeit ein neues Spiel beginnen, sage einfach „Spiel starten“. ",
-            "REPEAT_QUESTION_MESSAGE": "Wenn die letzte Frage wiederholt werden soll, sage „Wiederholen“ ",
-            "ASK_MESSAGE_START": "Möchten Sie beginnen?",
-            "HELP_REPROMPT": "Wenn du eine Frage beantworten willst, antworte mit der Zahl, die zur richtigen Antwort gehört. ",
-            "STOP_MESSAGE": "Möchtest du weiterspielen?",
-            "CANCEL_MESSAGE": "OK, dann lass uns bald mal wieder spielen.",
-            "NO_MESSAGE": "OK, spielen wir ein andermal. Auf Wiedersehen!",
-            "TRIVIA_UNHANDLED": "Sagt eine Zahl beispielsweise zwischen 1 und %s",
-            "HELP_UNHANDLED": "Sage ja, um fortzufahren, oder nein, um das Spiel zu beenden.",
-            "START_UNHANDLED": "Du kannst jederzeit ein neues Spiel beginnen, sage einfach „Spiel starten“.",
-            "NEW_GAME_MESSAGE": "Willkommen bei %s. ",
-            "WELCOME_MESSAGE": "Ich stelle dir %s Fragen und du versuchst, so viele wie möglich richtig zu beantworten. " +
-            "Sage einfach die Zahl, die zur richtigen Antwort passt. Fangen wir an. ",
-            "ANSWER_CORRECT_MESSAGE": "Richtig. ",
-            "ANSWER_WRONG_MESSAGE": "Falsch. ",
-            "CORRECT_ANSWER_MESSAGE": "Die richtige Antwort ist %s: %s. ",
-            "ANSWER_IS_MESSAGE": "Diese Antwort ist ",
-            "TELL_QUESTION_MESSAGE": "Frage %s. %s ",
-            "GAME_OVER_MESSAGE": "Du hast %s von %s richtig beantwortet. Danke fürs Mitspielen!",
-            "SCORE_IS_MESSAGE": "Dein Ergebnis ist %s. "
-        }
-    } */
+    }
 };
 
 var Alexa = require("alexa-sdk");
@@ -106,8 +80,8 @@ exports.handler = function(event, context, callback) {
 
 var newSessionHandlers = {
     "LaunchRequest": function () {
-        this.handler.state = GAME_STATES.START;
-        this.emitWithState("StartGame", true);
+        this.handler.state = GAME_STATES.SELECT_MODE;
+        this.emitWithState("SelectMode");
     },
     "AMAZON.StartOverIntent": function() {
         this.handler.state = GAME_STATES.START;
@@ -125,62 +99,28 @@ var newSessionHandlers = {
 
 var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
     "StartGame": function (newGame) {
-        var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE", GAME_LENGTH.toString()) : "";
+        var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
 
-/*        var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1)[0];
-        var accounts = getRandomElements(this.t("ACCOUNTS"), 2);
-        var socialNetwork = getRandomElements(this.t("SOCIAL_NETWORKS"), 1)[0];
-
-        var sortedAccounts = accounts.sort(function(a, b) {
-                                               return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
-                                           });
-
-        var repromptText = question.replace("NAME_ONE", accounts[0].name)
-                                   .replace("NAME_TWO", accounts[1].name)
-                                   .replace("SOCIAL_NETWORK", socialNetwork);
-
-        speechOutput += repromptText;
-
-        Object.assign(this.attributes, {
-            "speechOutput": repromptText,
-            "repromptText": repromptText,
-            "score": 0,
-            "questionCount": 0,
-            "correctAccount" : sortedAccounts[1],
-            "incorrectAccount" : sortedAccounts[0],
-            "socialNetwork" : socialNetwork
-        }); */
         writeAttributes(this, /* score */ 0, /* questionCount */ 0);
         speechOutput += this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
+
         this.emit(":ask", speechOutput, this.attributes.repromptText);
     }
 });
 
-function writeAttributes(target, score, questionCount) {
-  var question = getRandomElements(target.t("QUESTION_TEMPLATES"), 1)[0];
-  var accounts = getRandomElements(target.t("ACCOUNTS"), 2);
-  var socialNetwork = getRandomElements(target.t("SOCIAL_NETWORKS"), 1)[0];
+var selectModeStateHandlers = Alexa.CreateStateHandler(GAME_STATES.SELECT_MODE, {
+    "SelectMode" : function () {
+      var speechOutput = this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE");
+      var repromptText = "Would you like to play a standard game or play in streak mode?";
+      speechOutput += repromptText;
 
-  var sortedAccounts = accounts.sort(function(a, b) {
-                                         return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
-                                     });
+      this.handler.state = GAME_STATES.START;
 
-  var repromptText = question.replace("NAME_ONE", accounts[0].name)
-                             .replace("NAME_TWO", accounts[1].name)
-                             .replace("SOCIAL_NETWORK", socialNetwork);
-
-  Object.assign(target.attributes, {
-      "speechOutput": repromptText,
-      "repromptText": repromptText,
-      "score": score,
-      "questionCount": questionCount,
-      "correctAccount" : sortedAccounts[1],
-      "incorrectAccount" : sortedAccounts[0],
-      "socialNetwork" : socialNetwork
-  });
-}
+      this.emit(":ask", speechOutput, repromptText);
+    }
+});
 
 var triviaStateHandlers = Alexa.CreateStateHandler(GAME_STATES.TRIVIA, {
     "AnswerIntent": function () {
@@ -271,7 +211,7 @@ function handleUserGuess(userGaveUp) {
     var speechOutputAnalysis = "";
     var questionCount = parseInt(this.attributes.questionCount) + 1;
     var score = parseInt(this.attributes.score);
-    var previousQuestion = this.attributes.repromptText;
+    //var previousQuestion = this.attributes.repromptText;
     var userWasCorrect = this.event.request.intent.slots.Answer.value.toLowerCase() == this.attributes.correctAccount.name.toLowerCase();
     var card = getCard(this.attributes.correctAccount,
                        this.attributes.incorrectAccount,
@@ -298,37 +238,36 @@ function handleUserGuess(userGaveUp) {
         this.emit(":tellWithCard", speechOutput, card.Title, card.Content);
     } else {
 
-        // Build next question and answer
-        /*var question = getRandomElements(this.t("QUESTION_TEMPLATES"), 1)[0];
-        var accounts = getRandomElements(this.t("ACCOUNTS"), 2);
-        var socialNetwork = getRandomElements(this.t("SOCIAL_NETWORKS"), 1)[0];
-
-        // Lazy way to get the accounts in ascending order
-        var sortedAccounts = accounts.sort(function(a, b) {
-                                               return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
-                                           });
-
-        var repromptText = question.replace("NAME_ONE", accounts[0].name)
-                                   .replace("NAME_TWO", accounts[1].name)
-                                   .replace("SOCIAL_NETWORK", socialNetwork);
-
-        speechOutput += speechOutputAnalysis + " " + repromptText;
-
-        Object.assign(this.attributes, {
-            "speechOutput": repromptText,
-            "repromptText": repromptText,
-            "score": score,
-            "questionCount": questionCount,
-            "correctAccount": sortedAccounts[1],
-            "incorrectAccount": sortedAccounts[0],
-            "socialNetwork" : socialNetwork
-        });*/
         writeAttributes(this, score, questionCount);
         speechOutput += speechOutputAnalysis + " " + this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
         this.emit(":askWithCard", speechOutput, this.attributes.repromptText, card.Title, card.Content);
     }
+}
+
+function writeAttributes(target, score, questionCount) {
+  var question = getRandomElements(target.t("QUESTION_TEMPLATES"), 1)[0];
+  var accounts = getRandomElements(target.t("ACCOUNTS"), 2);
+  var socialNetwork = getRandomElements(target.t("SOCIAL_NETWORKS"), 1)[0];
+
+  var sortedAccounts = accounts.sort(function(a, b) {
+                                         return parseInt(a[socialNetwork].Count) - parseInt(b[socialNetwork].Count);
+                                     });
+
+  var repromptText = question.replace("NAME_ONE", accounts[0].name)
+                             .replace("NAME_TWO", accounts[1].name)
+                             .replace("SOCIAL_NETWORK", socialNetwork);
+
+  Object.assign(target.attributes, {
+      "speechOutput": repromptText,
+      "repromptText": repromptText,
+      "score": score,
+      "questionCount": questionCount,
+      "correctAccount" : sortedAccounts[1],
+      "incorrectAccount" : sortedAccounts[0],
+      "socialNetwork" : socialNetwork
+  });
 }
 
 function getCard(answer, wrongAnswer, socialNetwork, userWasCorrect) {
