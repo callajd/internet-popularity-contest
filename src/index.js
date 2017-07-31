@@ -3,10 +3,14 @@ var APP_ID = "amzn1.ask.skill.546859eb-0fc8-4116-93eb-432a6867c816";
 
 var GAME_LENGTH = 5;  // The number of questions per trivia game.
 var GAME_STATES = {
-    SELECT_MODE: "_SELECTMODE"
+    SELECT_MODE: "_SELECTMODE", // Choose game type.
     START: "_STARTMODE", // Setup and start the game.
     TRIVIA: "_TRIVIAMODE", // Asking trivia questions.
     HELP: "_HELPMODE" // The user is asking for help.
+};
+var GAME_MODES = {
+  STREAK: "Streak",
+  STANDARD: "Standard"
 };
 var questions = require("./questions");
 
@@ -47,7 +51,7 @@ var languageString = {
 
             "CARD_ANSWER_TEXT": "%s has %s %s followers.",
 
-            "SCORE5": "<prosody rate=\"x-slow\">Please slowly step away from the social media.</prosody>",
+            "SCORE5": "Please slowly step away from the social media.",
             "SCORE4": "Not bad I guess, unless you're a perfectionist like I am.",
             "SCORE3": "I've never really been a big fan of mediocrity myself.",
             "SCORE2": "That's closer to getting none right than it is getting them all right.",
@@ -67,7 +71,6 @@ var languageString = {
 };
 
 var Alexa = require("alexa-sdk");
-// var APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -112,15 +115,41 @@ var selectModeStateHandlers = Alexa.CreateStateHandler(GAME_STATES.SELECT_MODE, 
 var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
     "StartGame": function (newGame) {
         var gameMode = this.event.request.intent.slots.GameMode.value;
-        var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
+        // var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
 
-        Object.assign(this.attributes, )
+
         writeAttributes(this, gameMode, /* score */ 0, /* questionCount */ 0);
         speechOutput += this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
 
         this.emit(":ask", speechOutput, this.attributes.repromptText);
+    },
+    "AMAZON.StartOverIntent": function () {
+        this.handler.state = GAME_STATES.START;
+        this.emitWithState("StartGame", false);
+    },
+    "AMAZON.RepeatIntent": function () {
+        this.emit(":ask", this.attributes["speechOutput"], this.attributes["repromptText"]);
+    },
+    "AMAZON.HelpIntent": function () {
+        this.handler.state = GAME_STATES.HELP;
+        this.emitWithState("helpTheUser", false);
+    },
+    "AMAZON.StopIntent": function () {
+        this.handler.state = GAME_STATES.HELP;
+        var speechOutput = this.t("STOP_MESSAGE");
+        this.emit(":ask", speechOutput, speechOutput);
+    },
+    "AMAZON.CancelIntent": function () {
+        this.emit(":tell", this.t("CANCEL_MESSAGE"));
+    },
+    "Unhandled": function () {
+        var speechOutput = this.t("TRIVIA_UNHANDLED");
+        this.emit(":ask", speechOutput, speechOutput);
+    },
+    "SessionEndedRequest": function () {
+        console.log("Session ended in trivia state: " + this.event.request.reason);
     }
 });
 
@@ -211,6 +240,7 @@ function handleUserGuess(userGaveUp) {
 
     var speechOutput = "";
     var speechOutputAnalysis = "";
+    var gameMode = this.attributes.gameMode;
     var questionCount = parseInt(this.attributes.questionCount) + 1;
     var score = parseInt(this.attributes.score);
     //var previousQuestion = this.attributes.repromptText;
