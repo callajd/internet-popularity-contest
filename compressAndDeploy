@@ -1,5 +1,5 @@
-mv ~/code/src/InternetPopularityContest/src/InternetPopularityContest.zip ~/code/src/InternetPopularityContest/InternetPopularityContest.zip.bak
-pushd ~/code/src/InternetPopularityContest/src
+mv ~/code/src/internet-popularity-contest/src/InternetPopularityContest.zip ~/code/src/internet-popularity-contest/InternetPopularityContest.zip.bak
+pushd ~/code/src/internet-popularity-contest/src
 zip -q -r InternetPopularityContest.zip *
 popd
-aws lambda update-function-code --publish --function-name InternetPopularityContest --zip-file fileb://~/code/src/InternetPopularityContest/src/InternetPopularityContest.zip
+aws lambda update-function-code --publish --function-name InternetPopularityContest --zip-file fileb://~/code/src/internet-popularity-contest/src/InternetPopularityContest.zip

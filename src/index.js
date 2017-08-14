@@ -9,8 +9,8 @@ var GAME_STATES = {
     HELP: "_HELPMODE" // The user is asking for help.
 };
 var GAME_MODES = {
-  STREAK: "Streak",
-  STANDARD: "Standard"
+  STREAK: "streak",
+  STANDARD: "standard"
 };
 var questions = require("./questions");
 
@@ -56,7 +56,9 @@ var languageString = {
             "SCORE3": "I've never really been a big fan of mediocrity myself.",
             "SCORE2": "That's closer to getting none right than it is getting them all right.",
             "SCORE1": "There's this thing called the internet.  You might want to look in to it.",
-            "SCORE0": "My annoying sister Siri could do better than that."
+            "SCORE0": "My annoying sister Siri could do better than that.",
+
+            "STREAKCOMMENT": "Your streak ended after getting %s questions correct.  Nice job."
         }
     },
     "en-US": {
@@ -84,7 +86,7 @@ exports.handler = function(event, context, callback) {
 var newSessionHandlers = {
     "LaunchRequest": function () {
         this.handler.state = GAME_STATES.SELECT_MODE;
-        this.emitWithState("SelectMode", true);
+        this.emitWithState("selectGameMode", true);
     },
     "AMAZON.StartOverIntent": function() {
         this.handler.state = GAME_STATES.SELECT_MODE;
@@ -101,7 +103,7 @@ var newSessionHandlers = {
 };
 
 var selectModeStateHandlers = Alexa.CreateStateHandler(GAME_STATES.SELECT_MODE, {
-    "SelectMode" : function (onLaunch) {
+    "selectGameMode" : function (onLaunch) {
       var speechOutput = onLaunch ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
       var repromptText = "Would you like to play a standard game or play in streak mode?";
       speechOutput += repromptText;
@@ -109,17 +111,51 @@ var selectModeStateHandlers = Alexa.CreateStateHandler(GAME_STATES.SELECT_MODE, 
       this.handler.state = GAME_STATES.START;
 
       this.emit(":ask", speechOutput, repromptText);
+    },
+    "AMAZON.StartOverIntent": function () {
+        this.handler.state = GAME_STATES.START;
+        this.emitWithState("StartGame", false);
+    },
+    "AMAZON.RepeatIntent": function () {
+        this.emit(":ask", this.attributes["speechOutput"], this.attributes["repromptText"]);
+    },
+    "AMAZON.HelpIntent": function () {
+        this.handler.state = GAME_STATES.HELP;
+        this.emitWithState("helpTheUser", false);
+    },
+    "AMAZON.StopIntent": function () {
+        this.handler.state = GAME_STATES.HELP;
+        var speechOutput = this.t("STOP_MESSAGE");
+        this.emit(":ask", speechOutput, speechOutput);
+    },
+    "AMAZON.CancelIntent": function () {
+        this.emit(":tell", this.t("CANCEL_MESSAGE"));
+    },
+    "Unhandled": function () {
+        var speechOutput = this.t("TRIVIA_UNHANDLED");
+        this.emit(":ask", speechOutput, speechOutput);
+    },
+    "SessionEndedRequest": function () {
+        console.log("Session ended in trivia state: " + this.event.request.reason);
     }
 });
 
 var startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
-    "StartGame": function (newGame) {
-        var gameMode = this.event.request.intent.slots.GameMode.value;
-        // var speechOutput = newGame ? this.t("NEW_GAME_MESSAGE", this.t("GAME_NAME")) + this.t("WELCOME_MESSAGE") : "";
+    "SelectModeIntent": function (newGame) {
+        var resolutions = this.event.request.intent.slots.GameMode.resolutions;
 
+        // If a synonym was used, we need to pin this to the canonical value
+        var synonymWasResolved =  resolutions
+                               && resolutions.resolutionsPerAuthority
+                               && resolutions.resolutionsPerAuthority.length > 0
+                               && resolutions.resolutionsPerAuthority[0]
+                               && resolutions.resolutionsPerAuthority[0].status.code == 'ER_SUCCESS_MATCH';
+
+        var gameMode = synonymWasResolved ? resolutions.resolutionsPerAuthority[0].values[0].value.name
+                                          : this.event.request.intent.slots.GameMode.value;
 
         writeAttributes(this, gameMode, /* score */ 0, /* questionCount */ 0);
-        speechOutput += this.attributes.speechOutput;
+        var speechOutput = this.attributes.speechOutput;
         // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
         this.handler.state = GAME_STATES.TRIVIA;
 
@@ -238,44 +274,51 @@ var helpStateHandlers = Alexa.CreateStateHandler(GAME_STATES.HELP, {
 
 function handleUserGuess(userGaveUp) {
 
-    var speechOutput = "";
-    var speechOutputAnalysis = "";
-    var gameMode = this.attributes.gameMode;
-    var questionCount = parseInt(this.attributes.questionCount) + 1;
-    var score = parseInt(this.attributes.score);
-    //var previousQuestion = this.attributes.repromptText;
-    var userWasCorrect = this.event.request.intent.slots.Answer.value.toLowerCase() == this.attributes.correctAccount.name.toLowerCase();
-    var card = getCard(this.attributes.correctAccount,
-                       this.attributes.incorrectAccount,
-                       this.attributes.socialNetwork,
-                       userWasCorrect);
+  this.handler.state = GAME_STATES.TRIVIA;  // Is this necessary?
 
-    if (userWasCorrect) {
-        score++;
-        speechOutputAnalysis = this.t("ANSWER_CORRECT_MESSAGE");
+  var gameMode = this.attributes.gameMode.toLowerCase();
+  var questionCount = parseInt(this.attributes.questionCount) + 1;
+  var userWasCorrect = this.event.request.intent.slots.Answer.value.toLowerCase() == this.attributes.correctAccount.name.toLowerCase();
+  var score = userWasCorrect ? parseInt(this.attributes.score) + 1 : parseInt(this.attributes.score);
+
+  var card = getCard(this.attributes.correctAccount,
+                     this.attributes.incorrectAccount,
+                     this.attributes.socialNetwork,
+                     userWasCorrect);
+
+    var speechOutput = card.Content;
+
+    var gameOver = gameMode == GAME_MODES.STREAK && !userWasCorrect
+                || gameMode == GAME_MODES.STANDARD && questionCount == GAME_LENGTH;
+
+    if (gameOver) {
+      speechOutput += " " + getGameOverSpeechOutput.call(this, gameMode, score, userGaveUp);
+      this.emit(":tellWithCard", speechOutput, card.Title, card.Content);
     } else {
-        if (!userGaveUp) {
-            speechOutputAnalysis = this.t("ANSWER_WRONG_MESSAGE");
-        }
-        speechOutputAnalysis += this.t("CORRECT_ANSWER_MESSAGE", this.attributes.correctAccount.name);
+      writeAttributes(this, this.attributes.gameMode, score, questionCount);
+      //speechOutput += getIntermediateSpeechOutput(gameMode, score, questionCount);
+      this.emit(":askWithCard", speechOutput, this.attributes.repromptText, card.Title, card.Content);
     }
+}
 
-    // Check if we can exit the game session after GAME_LENGTH questions (zero-indexed)
-    if (questionCount == GAME_LENGTH) {
+function getGameOverSpeechOutput(gameMode, score, userGaveUp) {
 
-        speechOutput = userGaveUp ? "" : this.t("ANSWER_IS_MESSAGE");
-        var scoreRemark = this.t("SCORE" + score.toString());
-        speechOutput += speechOutputAnalysis + this.t("GAME_OVER_MESSAGE", score.toString(), GAME_LENGTH.toString(), scoreRemark);
+  var speechOutput = "";
 
-        this.emit(":tellWithCard", speechOutput, card.Title, card.Content);
-    } else {
-
-        writeAttributes(this, this.attributes.gameMode, score, questionCount);
-        speechOutput += speechOutputAnalysis + " " + this.attributes.speechOutput;
-        // Set the current state to trivia mode. The skill will now use handlers defined in triviaStateHandlers
-        this.handler.state = GAME_STATES.TRIVIA;
-        this.emit(":askWithCard", speechOutput, this.attributes.repromptText, card.Title, card.Content);
+  if(!userGaveUp) {
+    if(gameMode == GAME_MODES.STANDARD) {
+      var scoreRemark = this.t("SCORE" + score.toString());
+      speechOutput = this.t("GAME_OVER_MESSAGE", score.toString(), GAME_LENGTH.toString(), scoreRemark);
+    } else { // Streak mode
+      speechOutput = this.t("STREAKCOMMENT", score.toString());
     }
+  }
+
+  return speechOutput;
+}
+
+function getIntermediateSpeechOutput(gameMode, score, questionCount) {
+  return "";
 }
 
 function writeAttributes(target, gameMode, score, questionCount) {
